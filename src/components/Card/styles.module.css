@@ -1,11 +1,16 @@
-.card-container {
-  width: 150px;
+.card {
+  align-items: center;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  width: 140px;
 }
 
-.card {
-  height: 200px;
-  position: relative;
-  width: 137px;
+.card img {
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
 }
 
 .clickable {
