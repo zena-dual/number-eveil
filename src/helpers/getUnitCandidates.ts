@@ -5,7 +5,12 @@ type Cons = {
   cdr: Cons[];
 };
 
-export const getUnitCandidates = (targetId: number): NumberMonster[][] => {
+interface Props {
+  fixedId: number | undefined;
+  targetId: number;
+}
+
+export const getUnitCandidates = ({ fixedId, targetId }: Props): NumberMonster[][] => {
   const target = numberMonsters.find(({ id }) => id === targetId);
   if (target === undefined) {
     return [];
@@ -85,18 +90,29 @@ export const getUnitCandidates = (targetId: number): NumberMonster[][] => {
     })
     .filter(({ cdr }) => cdr.length > 0);
 
-  return results.flatMap(({ car, cdr }) =>
-    cdr.flatMap(({ car: carInCdr, cdr: cdrInCdr }) =>
-      cdrInCdr.flatMap(({ car: carInCdrInCdr, cdr: cdrInCdrInCdr }) =>
-        cdrInCdrInCdr.map(({ car: carInCdrInCdrInCdr }) =>
-          [
-            carInCdrInCdrInCdr,
-            carInCdrInCdr,
-            carInCdr,
-            car,
-          ],
+  return results
+    .flatMap(({ car, cdr }) =>
+      cdr.flatMap(({ car: carInCdr, cdr: cdrInCdr }) =>
+        cdrInCdr.flatMap(({ car: carInCdrInCdr, cdr: cdrInCdrInCdr }) =>
+          cdrInCdrInCdr.map(({ car: carInCdrInCdrInCdr }) =>
+            [
+              carInCdrInCdrInCdr,
+              carInCdrInCdr,
+              carInCdr,
+              car,
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    )
+    .filter(result => {
+      if (fixedId === undefined) {
+        return true;
+      }
+      return result.some(({ id }) => id === fixedId);
+    })
+    .map(result => [
+      ...result.filter(({ id }) => id === fixedId),
+      ...result.filter(({ id }) => id !== fixedId),
+    ]);
 };

@@ -8,8 +8,10 @@
 
 .result-text {
   font-size: 18px;
+  line-height: 24px;
   padding-bottom: 16px;
   padding-top: 16px;
+  text-align: center;
 }
 
 .unit-candidate-container {

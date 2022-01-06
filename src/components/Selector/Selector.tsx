@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { getUnitCandidates } from '../../helpers/getUnitCandidates';
 import { NumberMonster, numberMonsters } from '../../helpers/numberMonsters';
 import { Card } from '../Card';
@@ -8,8 +8,10 @@ import styles from './styles.module.css';
 type SelectorType = 'image' | 'name';
 
 export const Selector = () => {
+  const [fixedId, setFixedId] = useState<number | undefined>(undefined);
   const [selectedId, setSelectedId] = useState(NaN);
   const [selectorType, setSelectorType] = useState<SelectorType>('name');
+  const [shouldFilterResult, setShouldFilterResult] = useState(false);
   const [unitCandidates, setUnitCandidates] = useState<NumberMonster[][]>([]);
 
   useEffect(() => {
@@ -18,13 +20,22 @@ export const Selector = () => {
       return;
     }
 
-    setUnitCandidates(getUnitCandidates(selectedId));
-  }, [selectedId]);
+    setUnitCandidates(getUnitCandidates({ fixedId, targetId: selectedId }));
+  }, [fixedId, selectedId]);
 
   const handleButtonClick = () => {
+    setFixedId(NaN);
     setSelectedId(NaN);
     setSelectorType('name');
     setUnitCandidates([]);
+  };
+
+  const handleFilterResultCheckboxClick: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+    setShouldFilterResult(target.checked);
+
+    if (!target.checked) {
+      setFixedId(undefined);
+    }
   };
 
   return (
@@ -83,7 +94,34 @@ export const Selector = () => {
         </div>
       )}
 
-      {!Number.isNaN(selectedId) && <Result selectedId={selectedId} unitCandidates={unitCandidates} />}
+      <div className={styles['filter-result-container']}>
+        <input
+          id="filter-result-checkbox"
+          checked={shouldFilterResult}
+          onChange={handleFilterResultCheckboxClick}
+          type="checkbox"
+        />
+
+        <label htmlFor="filter-result-checkbox">素材のうち１枚を固定する</label>
+      </div>
+
+      {shouldFilterResult && (
+        <div className={styles['names-container']}>
+          <select onChange={({ target }) => setFixedId(Number(target.value))} value={fixedId || ''}>
+            <option value="">カード名を選択</option>
+
+            {numberMonsters.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {!Number.isNaN(selectedId) && (
+        <Result fixedId={fixedId} selectedId={selectedId} unitCandidates={unitCandidates} />
+      )}
     </div>
   );
 };
