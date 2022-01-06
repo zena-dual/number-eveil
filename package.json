@@ -2,9 +2,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "NODE_ENV=production next build",
+    "export": "next export",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
     "destyle.css": "^3.0.2",
