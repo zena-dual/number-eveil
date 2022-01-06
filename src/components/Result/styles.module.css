@@ -1,0 +1,26 @@
+.result-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.result-text {
+  font-size: 18px;
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+
+.unit-candidate-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.unit-candidate {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  width: min(1024px, calc(100vw - 16px));
+}

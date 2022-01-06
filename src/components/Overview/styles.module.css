@@ -1,0 +1,12 @@
+.overview {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-text {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 16px 24px;
+  width: min(1024px, calc(100vw - 16px));
+}
