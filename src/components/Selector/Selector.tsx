@@ -30,7 +30,7 @@ export const Selector = () => {
   return (
     <div className={styles.container}>
       <div className={styles['button-container']}>
-        <button onClick={handleButtonClick}>
+        <button onClick={handleButtonClick} type="button">
           リセットする
         </button>
       </div>
@@ -77,7 +77,7 @@ export const Selector = () => {
         <div className={styles['cards-container']}>
           {numberMonsters.map(({ id, name }) => (
             <div key={id} className={styles['card-container']}>
-              <Card cardId={id} cardName={name} clickable onClick={() => setSelectedId(id)} />
+              <Card cardId={id} cardName={name} onClick={() => setSelectedId(id)} />
             </div>
           ))}
         </div>

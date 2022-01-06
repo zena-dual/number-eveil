@@ -11,7 +11,7 @@ export const getUnitCandidates = (targetId: number): NumberMonster[][] => {
     return [];
   }
 
-  const uniqueNumbers: typeof numberMonsters = numberMonsters.reduce(
+  const uniqueNumbers: typeof numberMonsters = numberMonsters.reduce<typeof numberMonsters>(
     (previousValue, currentValue) => {
       if (previousValue.some(({ number, rank }) => number === currentValue.number && rank === currentValue.rank)) {
         return previousValue;

@@ -3,18 +3,21 @@ import styles from './styles.module.css';
 interface Props {
   cardId: number;
   cardName: string;
-  clickable: boolean;
   onClick?: () => void;
 }
 
-export const Card = ({ cardId, cardName, clickable, onClick }: Props) => (
-  <div className={styles.card}>
-    <img
-      alt={cardName}
-      className={clickable ? styles.clickable : ''}
-      loading="lazy"
-      onClick={onClick}
-      src={`/img/${cardId}.jpeg`}
-    />
-  </div>
-);
+export const Card = ({ cardId, cardName, onClick }: Props) => {
+  if (onClick !== undefined) {
+    return (
+      <button className={styles.card} onClick={onClick} type="button">
+        <img alt={cardName} className={styles.clickable} loading="lazy" src={`/img/${cardId}.jpeg`} />
+      </button>
+    );
+  }
+
+  return (
+    <div className={styles.card}>
+      <img alt={cardName} loading="lazy" src={`/img/${cardId}.jpeg`} />
+    </div>
+  );
+};

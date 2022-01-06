@@ -12,7 +12,8 @@ export const Result = ({ selectedId, unitCandidates }: Props) => {
   if (selectedNumberMonster === undefined) {
     return null;
   }
-  const { id, name } = selectedNumberMonster;
+
+  const { name } = selectedNumberMonster;
 
   return (
     <div className={styles['result-container']}>
@@ -23,17 +24,17 @@ export const Result = ({ selectedId, unitCandidates }: Props) => {
       </div>
 
       <div className={styles['unit-candidate-container']}>
-        {unitCandidates.map((unitCandidate, index) => (
-          <div key={index} className={styles['unit-candidate']}>
-            <Card cardId={id} cardName={name} clickable={false} />
+        {unitCandidates.map((unitCandidate) => (
+          <div key={unitCandidate.map(({ id }) => `${id}`).join('-')} className={styles['unit-candidate']}>
+            <Card cardId={selectedNumberMonster.id} cardName={name} />
             ＝
-            <Card cardId={unitCandidate[0].id} cardName={unitCandidate[0].name} clickable={false} />
+            <Card cardId={unitCandidate[0].id} cardName={unitCandidate[0].name} />
             ＋
-            <Card cardId={unitCandidate[1].id} cardName={unitCandidate[1].name} clickable={false} />
+            <Card cardId={unitCandidate[1].id} cardName={unitCandidate[1].name} />
             ＋
-            <Card cardId={unitCandidate[2].id} cardName={unitCandidate[2].name} clickable={false} />
+            <Card cardId={unitCandidate[2].id} cardName={unitCandidate[2].name} />
             ＋
-            <Card cardId={unitCandidate[3].id} cardName={unitCandidate[3].name} clickable={false} />
+            <Card cardId={unitCandidate[3].id} cardName={unitCandidate[3].name} />
           </div>
         ))}
       </div>
