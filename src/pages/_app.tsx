@@ -22,6 +22,8 @@ const App = ({ Component, pageProps }: Props<any>) => {
         <title>ナンバーズ・エヴァイユシミュレーター</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <script async charSet="utf-8" src="https://platform.twitter.com/widgets.js" />
       </Head>
 
       <Component {...pageProps} />
