@@ -20,7 +20,16 @@ export const Result = ({ fixedId, selectedId, unitCandidates }: Props) => {
   if (unitCandidates.length === 0) {
     return (
       <div className={styles['result-container']}>
-        <div className={styles['result-text']}>{`「${name}」を特殊召喚できる組み合わせはありません。`}</div>
+        <div className={styles['result-text']}>
+          {fixedNumberMonster !== undefined && (
+            <>
+              {`「${fixedNumberMonster.name}」を素材として`}
+              <br />
+            </>
+          )}
+
+          {`「${name}」を特殊召喚できる組み合わせはありません。`}
+        </div>
       </div>
     );
   }
