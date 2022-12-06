@@ -14,7 +14,7 @@ export const Card = ({ cardId, cardName, onClick }: Props) => {
           alt={cardName}
           className={styles.clickable}
           loading="lazy"
-          src={`https://storage.googleapis.com/ygoprodeck.com/pics/${cardId}.jpg`}
+          src={`https://images.ygoprodeck.com/images/cards/${cardId}.jpg`}
         />
       </button>
     );
@@ -22,7 +22,7 @@ export const Card = ({ cardId, cardName, onClick }: Props) => {
 
   return (
     <div className={styles.card}>
-      <img alt={cardName} loading="lazy" src={`https://storage.googleapis.com/ygoprodeck.com/pics/${cardId}.jpg`} />
+      <img alt={cardName} loading="lazy" src={`https://images.ygoprodeck.com/images/cards/${cardId}.jpg`} />
     </div>
   );
 };
